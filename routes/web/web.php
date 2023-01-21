@@ -17,4 +17,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::view('/', 'index')->name('index');
+
 Auth::routes();
