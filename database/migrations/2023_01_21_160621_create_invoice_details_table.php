@@ -14,8 +14,17 @@ return new class extends Migration
     public function up()
     {
         Schema::create('invoice_details', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('InvoiceDetailID');
+            $table->unsignedBigInteger('InvoiceId');
+            $table->unsignedBigInteger('ProductId');
+            $table->decimal('Price', $precision=18, $scale=2);
+            $table->float('Quantity');
+            $table->decimal('Amount', $precision=18, $scale=2);
             $table->timestamps();
+            $table->foreign('InvoiceId')
+                    ->references('InvoiceId')->on('invoices');
+            $table->foreign('ProductId')
+                    ->references('ProductId')->on('products');
         });
     }
 

@@ -14,8 +14,15 @@ return new class extends Migration
     public function up()
     {
         Schema::create('invoices', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('InvoiceId');
+            $table->timestamp('Date');
+            $table->unsignedBigInteger('ClientId');
             $table->timestamps();
+            $table->foreign('ClientId')
+                    ->references('ClientId')->on('clients');
+                    // ask the desired action for on delete or on update
+                    // ->onDelete('cascade')
+                    // ->onUpdate('cascade');
         });
     }
 
