@@ -7,6 +7,7 @@ use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvi
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Facades\Route;
+use Symfony\Component\Finder\Finder; //needed in order to split the routes
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -34,7 +35,10 @@ class RouteServiceProvider extends ServiceProvider
                 ->group(base_path('routes/api.php'));
 
             Route::middleware('web')
-                ->group(base_path('routes/web.php'));
+                ->group(function(){
+                    $this->requireRoutes('routes/web');
+                });
+                // ->group(base_path('routes/web.php'));
         });
     }
 
@@ -48,5 +52,14 @@ class RouteServiceProvider extends ServiceProvider
         RateLimiter::for('api', function (Request $request) {
             return Limit::perMinute(60)->by($request->user()?->id ?: $request->ip());
         });
+    }
+
+    public function requireRoutes($path)
+    {
+        return collect(
+			Finder::create()->in(base_path($path))->name('*.php')
+		)->each(function($file){
+			require $file->getRealPath();
+		});
     }
 }
