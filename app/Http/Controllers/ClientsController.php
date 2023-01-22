@@ -36,7 +36,11 @@ class ClientsController extends Controller
      */
     public function create()
     {
-        //
+        $view = view('clients.form')->render();
+        return response()->json([
+            "status"=>"successful",
+            "view"=>$view
+            ], 200);
     }
 
     /**
@@ -47,7 +51,19 @@ class ClientsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'name'=>'required'
+        ]);
+
+        $client = new Clients([
+            'name'=>$request->name
+        ]);
+
+        $client->save();
+
+        return response()->json($client, 201);
+
+
     }
 
     /**

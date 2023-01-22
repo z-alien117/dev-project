@@ -53,9 +53,11 @@
 			{{-- JavaScripts --}}
 			<script src="{{asset('layout/js/jquery.js')}}"></script>
 			<script src="{{asset('layout/js/plugins.min.js')}}"></script>
+            {{-- @vite('resources/js/app.js') --}}
 
 			{{-- Footer Scripts --}}
 			<script src="{{asset('layout/js/functions.js')}}"></script>
+			<script src="{{asset('js/helpers.js')}}"></script>
 		@show
 
 	</body>

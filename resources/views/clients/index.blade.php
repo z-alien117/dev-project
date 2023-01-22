@@ -14,7 +14,9 @@
 
 @section('content')
 <div id="clients_data" data_url="{{route('functions.clients_data')}}"></div>
+
 <div class="container clearfix">
+    <button href="#" class="button button-border button-rounded button-fill button-aqua btn_add" get_url="{{Route('functions.clients_form')}}"><span><i class="icon-plus1"></i>New Client</span></button>
     <div class="table-responsive">
         <table id="clients_table" class="table table-striped table-bordered" cellspacing="0" width="100%">
             <thead>
