@@ -43,7 +43,7 @@
 		</div>
 		{{-- #wrapper end --}}
 
-		@section('scrips')
+		@section('scripts')
 			{{-- JavaScripts --}}
 			<script src="{{asset('layout/js/jquery.js')}}"></script>
 			<script src="{{asset('layout/js/plugins.min.js')}}"></script>
