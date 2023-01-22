@@ -16,7 +16,17 @@ class ClientsController extends Controller
      */
     public function index()
     {
-        
+        $clients = Clients::select('id','name');
+        return DataTables::eloquent($clients)
+            ->addColumn('options',function($clients){
+                return
+                "
+                <button type='submit' class='btn btn-warning btn_edit' data-toggle='tooltip' title='Editar' data-original-title='Editar' get_url='". "ruta de edicion" ."'><i class='fas fa-pencil-alt'></i></button>
+                <button type='submit' class='btn btn-danger btn_delete' data-toggle='tooltip' title='Eliminar' data-original-title='Eliminar' delete_url='". "ruta de eliminación" ."'><i class='fas fa-trash'></i></button>
+                ";
+            })
+            ->rawColumns(['options'])
+            ->make(true);
     }
 
     /**

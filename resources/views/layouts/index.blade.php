@@ -31,6 +31,7 @@
 			{{-- Content --}}
 			<section id="content">
 				<div class="content-wrap py-0">
+                    @yield('page-title')
 					@yield('content')
 				</div>
 			</section>
