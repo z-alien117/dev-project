@@ -33,9 +33,14 @@
 				<div class="content-wrap py-0">
                     @yield('page-title')
 					@yield('content')
+
 				</div>
 			</section>
 			{{-- Content end --}}
+
+            {{-- BEGIN MODAL --}}
+            <div id="DynamicModal"></div>
+            {{-- END MODAL --}}
 
 			{{-- Footer --}}
 			@include('layouts.footer')
