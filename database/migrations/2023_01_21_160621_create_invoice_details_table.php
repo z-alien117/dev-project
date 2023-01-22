@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('invoice_details', function (Blueprint $table) {
-            $table->bigIncrements('InvoiceDetailID');
+            $table->bigIncrements('id');
             $table->unsignedBigInteger('InvoiceId');
             $table->unsignedBigInteger('ProductId');
             $table->decimal('Price', $precision=18, $scale=2);
@@ -22,9 +22,9 @@ return new class extends Migration
             $table->decimal('Amount', $precision=18, $scale=2);
             $table->timestamps();
             $table->foreign('InvoiceId')
-                    ->references('InvoiceId')->on('invoices');
+                    ->references('id')->on('invoices');
             $table->foreign('ProductId')
-                    ->references('ProductId')->on('products');
+                    ->references('id')->on('products');
         });
     }
 
