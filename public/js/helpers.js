@@ -4,7 +4,7 @@ function openModal(url, btn, text){
         $('#DynamicModal').html(response.view);
         $('#largeModal').modal('show');
         enable_btn(btn, text);
-        console.log(response);
+        // console.log(response);
     })
 }
 

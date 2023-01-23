@@ -9,6 +9,7 @@
 	@section('styles')
 		<link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i,700|Poppins:300,400,500,600,700|PT+Serif:400,400i&display=swap" rel="stylesheet" type="text/css" />
 		@vite('resources/css/app.css')
+        <link rel="stylesheet" href="{{asset('plugins/sweetalert2/sweetalert2.min.css')}}">
 	@show
 
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -57,6 +58,7 @@
 
 			{{-- Footer Scripts --}}
 			<script src="{{asset('layout/js/functions.js')}}"></script>
+            <script src="{{asset('plugins/sweetalert2/sweetalert2.all.min.js')}}"></script>
 			<script src="{{asset('js/helpers.js')}}"></script>
 		@show
 

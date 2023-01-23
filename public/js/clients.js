@@ -38,12 +38,20 @@ $(function(){
             processData: false,
             success: function(result, status, xhr){
                 hideModal();
-                alert('yaas');
+                Swal.fire(
+                    'Correct',
+                    'Client added',
+                    'success'
+                );
                 table.ajax.reload();
             }
         })
         .fail(function(result){
-            alert('verifique los datos');
+            Swal.fire(
+                'Error',
+                'Please verify the data',
+                'error'
+            );
             enable_btn(btn, '<i class="icon-save2"></i>Save')
         })
         
