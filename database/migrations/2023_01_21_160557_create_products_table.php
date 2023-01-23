@@ -15,6 +15,8 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('Name', 450);
+            $table->decimal('Price', $precision=18, $scale=2);
             $table->timestamps();
             $table->softDeletes();
 

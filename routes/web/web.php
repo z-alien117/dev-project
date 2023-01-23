@@ -21,5 +21,6 @@ Route::get('/', function () {
 
 Route::view('/', 'index')->name('index');
 Route::get('clients', [IndexController::class, 'clients_view'])->name('clients_view');
+Route::get('products', [IndexController::class, 'products_view'])->name('products_view');
 
 Auth::routes();

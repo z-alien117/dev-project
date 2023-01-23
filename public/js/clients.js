@@ -44,17 +44,31 @@ $(function(){
                     'success'
                 );
                 table.ajax.reload();
+            },
+            error: function(result,status,xhr){
+                console.log(result);
+                $errors = result['responseJSON']['errors'];
+                Object.entries($errors).forEach(entry => {
+                    const [key,value]=entry;
+                    console.log(key);
+                    document.getElementById(key).classList.add("error");
+                });
+                Swal.fire(
+                    'Error',
+                    'Please verify the required data',
+                    'error'
+                )
+            enable_btn(btn, '<i class="icon-save2"></i>Save');
             }
         })
-        .fail(function(result){
-            Swal.fire(
-                'Error',
-                'Please verify the data',
-                'error'
-            );
-            enable_btn(btn, '<i class="icon-save2"></i>Save')
-        })
-        
+        // .fail(function(result){
+        //     Swal.fire(
+        //         'Error',
+        //         'Please verify the data',
+        //         'error'
+        //     );
+        //     enable_btn(btn, '<i class="icon-save2"></i>Save');
+        // });
     })
 
     $(document).on('click', '.btn_edit', function(){

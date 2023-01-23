@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Products;
 use Illuminate\Http\Request;
+use Yajra\DataTables\Facades\DataTables;
+
 
 class ProductsController extends Controller
 {
@@ -14,7 +16,17 @@ class ProductsController extends Controller
      */
     public function index()
     {
-        //
+        $products = Products::select('id','name','price');
+        return DataTables::eloquent($products)
+            ->addColumn('options',function($products){
+                return
+                "
+                <button type='submit' class='btn btn-warning btn_edit' data-toggle='tooltip' title='Editar' data-original-title='Editar' get_url='". route('functions.edit_product', ['product'=>$products->id]) ."'><i class='icon-line-edit-2'></i> Edit</button>
+                <button type='submit' class='btn btn-danger btn_delete' data-toggle='tooltip' title='Eliminar' data-original-title='Eliminar' delete_url='". route('functions.delete_product', ['product'=>$products->id]) ."'><i class='icon-trash2'></i> Delete</button>
+                ";
+            })
+            ->rawColumns(['options'])
+            ->make(true);
     }
 
     /**
@@ -24,7 +36,11 @@ class ProductsController extends Controller
      */
     public function create()
     {
-        //
+        $view = view('products.form')->render();
+        return response()->json([
+            "status"=>"successful",
+            "view"=>$view
+            ],200);
     }
 
     /**
@@ -35,7 +51,10 @@ class ProductsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'name'=>'required',
+            'price'=>'required'
+        ]);
     }
 
     /**

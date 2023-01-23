@@ -9,4 +9,8 @@ class IndexController extends Controller
     public function clients_view(){
         return view('clients.index', ['page_title'=>'Clients']);
     }
+
+    public function products_view(){
+        return view('products.index', ['page_title'=>'Products']);
+    }
 }
