@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Invoices;
+use App\Models\Clients;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -39,7 +40,11 @@ class InvoicesController extends Controller
      */
     public function create()
     {
-        //
+        $view = view('invoices.form', ['clients'=>Clients::all()])->render();
+        return response()->json([
+            "status"=>"successful",
+            "view"=>$view
+            ],200);
     }
 
     /**

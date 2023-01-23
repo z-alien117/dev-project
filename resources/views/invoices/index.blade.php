@@ -5,7 +5,10 @@
 
 @section('styles')
     @parent
-    <link rel="stylesheet" href="{{asset('plugins/DataTables/datatables.min.css')}}">
+    <link rel="stylesheet" href="{{asset('layout/css/components/bs-select.css')}}">
+    <link rel="stylesheet" href="{{asset('layout/css/components/datepicker.css')}}" type="text/css" />
+	<link rel="stylesheet" href="{{asset('layout/css/components/timepicker.css')}}" type="text/css" />
+
 @endsection
 
 @section('page-title')
@@ -16,14 +19,15 @@
 <div id="products_data" data_url="{{route('functions.invoice_data')}}"></div>
 
 <div class="container clearfix">
-    <button href="#" class="button button-border button-rounded button-fill button-aqua btn_add" get_url="{{Route('functions.products_form')}}"><span><i class="icon-plus1"></i>New Invoice</span></button>
+
+    <button href="#" class="button button-border button-rounded button-fill button-aqua btn_add" get_url="{{Route('functions.invoices_form')}}"><span><i class="icon-plus1"></i>New Invoice</span></button>
     <div class="table-responsive">
         <table id="products_table" class="table table-striped table-bordered" cellspacing="0" width="100%">
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Date</th>
                     <th>Client</th>
+                    <th>Date</th>
                     <th>Options</th>
                 </tr>
             </thead>
@@ -35,7 +39,9 @@
 
 @section('scripts')
     @parent
-    <script type="text/javascript" src="{{asset('plugins/DataTables/datatables.min.js')}}"></script>
-    <script type="text/javascript" src="{{asset('layout/js/components/bs-datatable.js')}}"></script>
+	<script src="{{asset('layout/js/components/bs-select.js')}}"></script>
+    <script src="{{asset('layout/js/components/moment.js')}}"></script>
+	<script src="{{asset('layout/js/components/timepicker.js')}}"></script>
+	<script src="{{asset('layout/js/components/datepicker.js')}}"></script>
     <script type="text/javascript" src="{{asset('js/invoices.js')}}"></script>
 @endsection

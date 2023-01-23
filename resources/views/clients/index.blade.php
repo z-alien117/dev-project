@@ -3,11 +3,6 @@
     @include('layouts.navbar')
 @endsection
 
-@section('styles')
-    @parent
-    <link rel="stylesheet" href="{{asset('plugins/DataTables/datatables.min.css')}}">
-@endsection
-
 @section('page-title')
     @include('layouts.page-title')
 @endsection
@@ -34,7 +29,5 @@
 
 @section('scripts')
     @parent
-    <script type="text/javascript" src="{{asset('plugins/DataTables/datatables.min.js')}}"></script>
-    <script type="text/javascript" src="{{asset('layout/js/components/bs-datatable.js')}}"></script>
     <script type="text/javascript" src="{{asset('js/clients.js')}}"></script>
 @endsection
