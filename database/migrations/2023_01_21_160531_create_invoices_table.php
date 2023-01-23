@@ -18,6 +18,7 @@ return new class extends Migration
             $table->timestamp('Date');
             $table->unsignedBigInteger('ClientId');
             $table->timestamps();
+            $table->softDeletes();
             $table->foreign('ClientId')
                     ->references('id')->on('clients');
                     // ask the desired action for on delete or on update

@@ -11,4 +11,5 @@ Route::group(['prefix' => 'functions', 'as' => 'functions.'], function(){
     Route::post('clients', [ClientsController::class, 'store'])->name('store_client');
     Route::get('clients/{client}', [ClientsController::class, 'edit'])->name('edit_client');
     Route::put('clients/{client_update}', [ClientsController::class, 'update'])->name('update_client');
+    Route::delete('clients/{client}', [ClientsController::class, 'destroy'])->name('delete_client');
 });

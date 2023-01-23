@@ -21,6 +21,7 @@ return new class extends Migration
             $table->float('Quantity');
             $table->decimal('Amount', $precision=18, $scale=2);
             $table->timestamps();
+            $table->softDeletes();
             $table->foreign('InvoiceId')
                     ->references('id')->on('invoices');
             $table->foreign('ProductId')

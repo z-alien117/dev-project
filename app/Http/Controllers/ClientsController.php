@@ -22,7 +22,7 @@ class ClientsController extends Controller
                 return
                 "
                 <button type='submit' class='btn btn-warning btn_edit' data-toggle='tooltip' title='Editar' data-original-title='Editar' get_url='". route('functions.edit_client', ['client'=>$clients->id]) ."'><i class='icon-line-edit-2'></i> Edit</button>
-                <button type='submit' class='btn btn-danger btn_delete' data-toggle='tooltip' title='Eliminar' data-original-title='Eliminar' delete_url='". "ruta de eliminación" ."'><i class='icon-trash2'></i> Delete</button>
+                <button type='submit' class='btn btn-danger btn_delete' data-toggle='tooltip' title='Eliminar' data-original-title='Eliminar' delete_url='". route('functions.delete_client', ['client'=>$clients->id]) ."'><i class='icon-trash2'></i> Delete</button>
                 ";
             })
             ->rawColumns(['options'])
@@ -115,8 +115,9 @@ class ClientsController extends Controller
      * @param  \App\Models\Clients  $clients
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Clients $clients)
+    public function destroy(Clients $client)
     {
-        //
+        $client->delete();
+        return response()->json(null,204);
     }
 }
