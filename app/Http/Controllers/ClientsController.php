@@ -21,8 +21,8 @@ class ClientsController extends Controller
             ->addColumn('options',function($clients){
                 return
                 "
-                <button type='submit' class='btn btn-warning btn_edit' data-toggle='tooltip' title='Editar' data-original-title='Editar' get_url='". "ruta de edicion" ."'><i class='fas fa-pencil-alt'></i></button>
-                <button type='submit' class='btn btn-danger btn_delete' data-toggle='tooltip' title='Eliminar' data-original-title='Eliminar' delete_url='". "ruta de eliminación" ."'><i class='fas fa-trash'></i></button>
+                <button type='submit' class='btn btn-warning btn_edit' data-toggle='tooltip' title='Editar' data-original-title='Editar' get_url='". route('functions.edit_client', ['client'=>$clients->id]) ."'><i class='icon-line-edit-2'></i> Edit</button>
+                <button type='submit' class='btn btn-danger btn_delete' data-toggle='tooltip' title='Eliminar' data-original-title='Eliminar' delete_url='". "ruta de eliminación" ."'><i class='icon-trash2'></i> Delete</button>
                 ";
             })
             ->rawColumns(['options'])
@@ -83,9 +83,13 @@ class ClientsController extends Controller
      * @param  \App\Models\Clients  $clients
      * @return \Illuminate\Http\Response
      */
-    public function edit(Clients $clients)
+    public function edit(Clients $client)
     {
-        //
+        $view = view('clients.form', ['client'=>$client])->render();
+        return response()->json([
+            "status"=>"successful",
+            "view"=>$view
+            ],200);
     }
 
     /**
@@ -95,9 +99,14 @@ class ClientsController extends Controller
      * @param  \App\Models\Clients  $clients
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Clients $clients)
+    public function update(Request $request, Clients $client_update)
     {
-        //
+        $validatedData = $request->validate([
+            'name'=>'required'
+        ]);
+        $client_update->name = $request->name;
+        $client_update->save();
+        return response()->json($client_update,200);
     }
 
     /**

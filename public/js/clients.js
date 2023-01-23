@@ -56,4 +56,11 @@ $(function(){
         })
         
     })
+
+    $(document).on('click', '.btn_edit', function(){
+        var btn = $(this);
+        var text = "<i class='icon-line-edit-2'></i> Edit";
+        var url = $(this).attr('get_url');
+        openModal(url,btn,text);
+    })
 })
