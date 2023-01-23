@@ -55,6 +55,16 @@ class ProductsController extends Controller
             'name'=>'required',
             'price'=>'required'
         ]);
+
+        $product = new Products([
+            'name'=>$request->name,
+            'price'=>$request->price
+        ]);
+        
+        $product->save();
+
+        return response()->json($product, 201);
+
     }
 
     /**

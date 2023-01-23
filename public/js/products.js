@@ -57,14 +57,6 @@ $(function(){
             enable_btn(btn, '<i class="icon-save2"></i>Save');
             }
         })
-        // .fail(function(result){
-        //     Swal.fire(
-        //         'Error',
-        //         'Please verify the data',
-        //         'error'
-        //     );
-        //     enable_btn(btn, '<i class="icon-save2"></i>Save');
-        // });
     });
 
 
