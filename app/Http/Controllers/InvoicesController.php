@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Invoices;
 use Illuminate\Http\Request;
+use Yajra\DataTables\Facades\DataTables;
+
 
 class InvoicesController extends Controller
 {
@@ -14,7 +16,20 @@ class InvoicesController extends Controller
      */
     public function index()
     {
-        //
+        $invoices = Invoices::select('id','Date','ClientId');
+        return DataTables::eloquent($invoices)
+            ->addColumn('Client',function($invoices){
+                return $invoices->Client->Name;
+            })
+            ->addColumn('options',function($invoices){
+                return
+                "
+                <button type='submit' class='btn btn-warning btn_edit' data-toggle='tooltip' title='Editar' data-original-title='Editar' get_url='". route('functions.edit_invoice', ['invoice'=>$invoices->id]) ."'><i class='icon-line-edit-2'></i> Edit</button>
+                <button type='submit' class='btn btn-danger btn_delete' data-toggle='tooltip' title='Eliminar' data-original-title='Eliminar' delete_url='". route('functions.delete_invoice', ['invoice'=>$invoices->id]) ."'><i class='icon-trash2'></i> Delete</button>
+                ";
+            })
+            ->rawColumns(['options'])
+            ->make(true);
     }
 
     /**

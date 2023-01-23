@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ClientsController;
 use App\Http\Controllers\ProductsController;
+use App\Http\Controllers\InvoicesController;
 
 
 Route::group(['prefix' => 'functions', 'as' => 'functions.'], function(){
@@ -22,6 +23,14 @@ Route::group(['prefix' => 'functions', 'as' => 'functions.'], function(){
     Route::get('products/{product}', [ProductsController::class, 'edit'])->name('edit_product');
     Route::put('products/{product_update}', [ProductsController::class, 'update'])->name('update_product');
     Route::delete('products/{product}', [ProductsController::class, 'destroy'])->name('delete_product');
+
+    // Invoices routes
+    Route::get('invoice_data', [InvoicesController::class, 'index'])->name('invoice_data');
+    Route::get('invoices/{invoice}', [InvoicesController::class, 'edit'])->name('edit_invoice');
+    Route::delete('invoices/{invoice}', [InvoicesController::class, 'destroy'])->name('delete_invoice');
+
+
+
 
 
 });
