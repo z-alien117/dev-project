@@ -12,24 +12,43 @@ function viewTable() {
     return table;
 }
 
+function tableInvoiceProducts(){
+    var table = $("#product_invoice_table").DataTable({
+        responsive: true,
+        "ajax": $('#products_invoice_data').attr('data_url'),
+        "columns":[
+            {data:'Options', name: "Options"},
+            {data:'Product', name:"Product"},
+            {data:'Price', name:"Unit Price"},
+            {data:'Quantity', name:"Quantity"},
+            {data:'Amount', name:"Total"}
+        ]
+    });
+    return table;
+}
+
 async function openModal(url, btn, text){
     await openModalAsync(url, btn, text);
+    $('#product_table').hide();
     $('.selectpicker').selectpicker();
     $('.datetimepicker').datetimepicker({
         showClose: true
     });
+
 }
 
 $(function(){
     var table = viewTable();
+    var products_invoice;
 
-
+    
     $(document).on('click','.btn_add',function(){
         var btn = $(this);
         var text = '<span><i class="icon-plus1"></i>New Invoice</span>';
         var url = $(this).attr('get_url');
         openModal(url,btn,text);
-    })
+        
+    });
 
     $(document).on('click','.btn_save',function(){
         var btn = $(this);
@@ -55,8 +74,11 @@ $(function(){
                     'success'
                 );
                 $("#product_data").html(result.products_view);
+                products_invoice = tableInvoiceProducts();
                 $("#product_select").selectpicker();
                 table.ajax.reload();
+                btn.remove();
+                $('#btn_close').html('<i class="icon-line2-close"></i> Close')
             },
             error: function(result,status,xhr){
                 console.log(result);
@@ -104,6 +126,8 @@ $(function(){
                 $('#product_select').selectpicker('refresh');
                 $('#price').val('');
                 $('#quantity').val('');
+                products_invoice.ajax.reload();
+
                 enable_btn(btn, '<i class="icon-save2"></i>Add');
             },
             error: function(result,status,xhr){

@@ -1,3 +1,5 @@
+<div id="products_invoice_data" data_url="{{route('functions.products_invoice_data',['invoice'=>$invoice->id])}}"></div>
+
 <form class="mb-0" id="productForm" name="template-contactform" action="{{route('functions.store_invoice_product', ['invoice'=>$invoice->id])}}" method="POST">
     @csrf
 

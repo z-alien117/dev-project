@@ -37,6 +37,32 @@ class InvoicesController extends Controller
     }
 
     /**
+     * Display a listing of the products of the invoice.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function products_invoice_data(Invoices $invoice)
+    {
+        $invoice_details = InvoiceDetails::Select('id','InvoiceId','ProductId','Price','Quantity','Amount')->where('InvoiceId',$invoice->id);
+
+        return DataTables::eloquent($invoice_details)
+            ->addColumn('Product',function($invoice_details){
+                return $invoice_details->products->first()->Name;
+            })
+            ->addColumn('Price',function($invoice_details){
+                return $invoice_details->products->first()->Price;
+            })
+            ->addColumn('Options',function($invoice_details){
+                return
+                "
+                <a href='#' class='remove' title='Remove this item'><i class='icon-trash2'></i>'MY ID IS: ".$invoice_details->id."'</a>
+                ";
+            })
+            ->rawColumns(['Options'])
+            ->make(true);
+    }
+
+    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
@@ -90,15 +116,24 @@ class InvoicesController extends Controller
 
     public function store_invoice_product(Request $request, Invoices $invoice)
     {
-        $invoice_details = new InvoiceDetails([
-            'InvoiceId' => $invoice->id,
-            'ProductId' => $request->product_select,
-            'Price' => $request->price,
-            'Quantity' => $request->quantity,
-            'Amount' => ($request->price*$request->quantity)
-        ]);
+        // validate if the product is already in the invoice if the product already exists just update the quantity
 
+        $details = InvoiceDetails::where('InvoiceId',$invoice->id)->where('ProductId',$request->product_select)->get();
+
+        if($details->isEmpty()){
+            $invoice_details = new InvoiceDetails([
+                'InvoiceId' => $invoice->id,
+                'ProductId' => $request->product_select,
+                'Price' => $request->price,
+                'Quantity' => $request->quantity
+            ]);
         $invoice_details->save();
+
+        }else{
+            $details->first()->Quantity += $request->quantity;
+            $details->first()->save();
+        }
+
         return response()->json("null",204);
 
 

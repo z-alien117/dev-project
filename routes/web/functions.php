@@ -26,6 +26,7 @@ Route::group(['prefix' => 'functions', 'as' => 'functions.'], function(){
 
     // Invoices routes
     Route::get('invoice_data', [InvoicesController::class, 'index'])->name('invoice_data');
+    Route::get('products_invoice_data/{invoice}', [InvoicesController::class, 'products_invoice_data'])->name('products_invoice_data');
     Route::get('invoices/form', [InvoicesController::class, 'create'])->name('invoices_form');
     Route::post('invoices', [InvoicesController::class, 'store'])->name('store_invoice');
     Route::post('invoice_product/{invoice}', [InvoicesController::class, 'store_invoice_product'])->name('store_invoice_product');

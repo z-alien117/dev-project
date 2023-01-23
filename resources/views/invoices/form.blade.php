@@ -45,13 +45,28 @@
         </form>
     </div>
     <div id="product_data"></div>
-    <div id="product_table"></div>
+    <div id="product_table_div">
+        <table id="product_invoice_table" class="table table-striped table-bordered cart" cellspacing="0" width="100%">
+            <thead>
+                <tr>
+                    <th class="cart-product-remove">Options</th>
+                    <th class="cart-product-name">Product</th>
+                    <th class="cart-product-price">Unit Price</th>
+                    <th class="cart-product-quantity">Quantity</th>
+                    <th class="cart-product-subtotal">Total</th>
+                </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+    </div>
 
     @endslot
     @slot('footer')
     <div class="col-12 form-group">
         <button class="btn_save button button-3d button-rounded button-green"><i class="icon-save2"></i> Save</button>
-        <button class="button button-3d button-rounded button-red"  data-bs-dismiss="modal"><i class="icon-thumbs-down21"></i> Cancel</button>
+        <button class="button button-3d button-rounded button-red" id="btn_close" data-bs-dismiss="modal"><i class="icon-thumbs-down21"></i> Cancel</button>
     </div>
     @endslot
 </x-modal>

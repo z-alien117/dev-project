@@ -19,7 +19,7 @@ return new class extends Migration
             $table->unsignedBigInteger('ProductId');
             $table->decimal('Price', $precision=18, $scale=2);
             $table->float('Quantity');
-            $table->decimal('Amount', $precision=18, $scale=2);
+            $table->decimal('Amount', $precision=18, $scale=2)->storedAs('Price * Quantity');
             $table->timestamps();
             $table->softDeletes();
             $table->foreign('InvoiceId')
