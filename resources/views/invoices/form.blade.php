@@ -1,3 +1,5 @@
+
+
 <x-modal>
     @slot('title')
         Add Invoice

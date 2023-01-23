@@ -98,11 +98,55 @@ $(function(){
         })
     });
 
+    $(document).on('click','.btn_delete',function(event){
+        event.preventDefault();
+        var btn = $(this);
+        disable_btn(btn);
+        Swal.fire({
+            title: 'Do you want to delete this record?',
+            type: 'warning',
+            backdrop: false,
+            showCancelButton: true,
+            confirmButtonColor: '#960d24',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Yes'
+        }).then((result)=>{
+            if(result.value){
+                $.ajax({
+                    url: btn.attr('delete_url'),
+                    type: 'POST',
+                    data: {
+                        _method: 'DELETE',
+                        _token: $('meta[name="csrf-token"]').attr('content')
+                    },
+                    success: function(result){
+                        console.log(result);
+                    }
+                });
+                Swal.fire(
+                    'Deleted',
+                    'Invoice deleted successfully',
+                    'success'
+                )
+                table.ajax.reload();
+            }else if(result.dismiss === Swal.DismissReason.cancel){
+                enable_btn(btn,"<i class='icon-trash2'></i> Delete");
+                Swal.fire(
+                    'Cancelled',
+                    '',
+                    'error'
+                )
+            }
+        })
+
+    })
+
     $(document).on('change','#product_select', function(){
         var price = $('#product_select option:selected').attr('data-subtext');
         $('#price').val(price);
     })
 
+    // add a product in the invoice
     $(document).on('click','.btn_save_product',function(){
         var btn = $(this);
         disable_btn(btn);
@@ -148,6 +192,7 @@ $(function(){
         })
     });
 
+    //delete a product from the invoice
     $(document).on('click','.btn_remove_product',function(event){
         event.preventDefault();
         var btn = $(this);

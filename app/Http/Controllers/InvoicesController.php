@@ -179,9 +179,10 @@ class InvoicesController extends Controller
      * @param  \App\Models\Invoices  $invoices
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Invoices $invoices)
+    public function destroy(Invoices $invoice)
     {
-        //
+        $invoice->delete();
+        return response()->json(null,204);
     }
     /**
      * Remove the product from the invoice details.
