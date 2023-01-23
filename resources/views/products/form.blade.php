@@ -19,7 +19,7 @@
                     </div>
                     <div class="col-md-6 form-group">
                         <label for="price">Price <small>*</small></label>
-                        <input type="number" name="price" id="price" value="{{$product->Price}}" class="sm-form-control required" />
+                        <input type="number" name="price" id="price" value="{{$product->Price}}" class="sm-form-control required"/>
                     </div>
 
                     <div class="w-100"></div>

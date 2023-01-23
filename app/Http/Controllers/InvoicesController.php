@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Invoices;
+use App\Models\Invoices; 
+use App\Models\InvoiceDetails; 
 use App\Models\Clients;
+use App\Models\Products;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
@@ -68,7 +70,37 @@ class InvoicesController extends Controller
         ]);
 
         $invoice->save();
-        return response()->json($invoice, 201);
+
+        // return response()->json($invoice, 201);
+
+        $products_view = view('invoices.products', ["invoice"=>$invoice, "products"=>Products::all()])->render();
+        return response()->json([
+            "status"=>"successful",
+            "invoice"=>$invoice,
+            "products_view"=>$products_view
+            ],201);
+
+    }
+    /**
+     * Store a new product in the invoice previously created
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+
+    public function store_invoice_product(Request $request, Invoices $invoice)
+    {
+        $invoice_details = new InvoiceDetails([
+            'InvoiceId' => $invoice->id,
+            'ProductId' => $request->product_select,
+            'Price' => $request->price,
+            'Quantity' => $request->quantity,
+            'Amount' => ($request->price*$request->quantity)
+        ]);
+
+        $invoice_details->save();
+        return response()->json("null",204);
+
 
     }
 
