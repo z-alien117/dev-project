@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Invoices;
 use App\Models\Clients;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -55,7 +56,20 @@ class InvoicesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'client'=>'required',
+            'date'=>'required'
+        ]);
+        $date = Carbon::createFromFormat('m/d/Y G:i A', $request->date)->toDateTimeString();
+
+        $invoice = new Invoices([
+            'ClientId'=>$request->client,
+            'Date'=>$date
+        ]);
+
+        $invoice->save();
+        return response()->json($invoice, 201);
+
     }
 
     /**

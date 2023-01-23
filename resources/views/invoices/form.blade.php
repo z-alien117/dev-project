@@ -29,7 +29,7 @@
                     <label for="">Date &amp; Time Picker</label>
                     <div class="form-group">
                         <div class="input-group text-start" data-target-input="nearest" data-target=".datetimepicker">
-                            <input type="text" id="date" name="date" class="form-control datetimepicker-input datetimepicker" data-target=".datetimepicker" placeholder="YYYY/MM/DD 00:00 AM/PM"/>
+                            <input type="text" id="date" name="date" class="form-control datetimepicker-input datetimepicker" data-target=".datetimepicker" placeholder="DD-MM-YYYY 00:00 AM/PM"/>
                             <div class="input-group-text" data-target=".datetimepicker" data-toggle="datetimepicker"><i class="icon-calendar"></i></div>
                         </div>
                     </div>
