@@ -13,4 +13,8 @@ class IndexController extends Controller
     public function products_view(){
         return view('products.index', ['page_title'=>'Products']);
     }
+
+    public function invoices_view(){
+        return view('Invoices.index', ['page_title'=>'Invoices']);
+    }
 }

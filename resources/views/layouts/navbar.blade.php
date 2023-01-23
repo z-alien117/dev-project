@@ -40,9 +40,9 @@
                 <nav class="primary-menu on-click">
 
                     <ul class="menu-container">
-                        <li class="menu-item"><a class="menu-link" href="index.html"><div>Clients</div></a></li>
-                        <li class="menu-item"><a class="menu-link" href="#"><div>Invoices</div></a></li>
-                        <li class="menu-item"><a class="menu-link" href="#"><div>Products</div></a></li>
+                        <li class="menu-item {{Route::is('clients_view')?'current':''}}"><a class="menu-link" href="{{route('clients_view')}}"><div>Clients</div></a></li>
+                        <li class="menu-item {{Route::is('products_view')?'current':''}}"><a class="menu-link" href="{{route('products_view')}}"><div>Products</div></a></li>
+                        <li class="menu-item {{Route::is('invoices_view')?'current':''}}"><a class="menu-link" href="{{route('invoices_view')}}"><div>Invoices</div></a></li>
                     </ul>
 
                 </nav>
