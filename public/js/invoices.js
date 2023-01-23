@@ -148,4 +148,47 @@ $(function(){
         })
     });
 
+    $(document).on('click','.btn_remove_product',function(event){
+        event.preventDefault();
+        var btn = $(this);
+        disable_btn(btn);
+        Swal.fire({
+            title: 'Do you want to delete this record?',
+            type: 'warning',
+            backdrop: false,
+            showCancelButton: true,
+            confirmButtonColor: '#960d24',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Yes'
+        }).then((result)=>{
+            if(result.value){
+                $.ajax({
+                    url: btn.attr('delete_url'),
+                    type: 'POST',
+                    data: {
+                        _method: 'DELETE',
+                        _token: $('meta[name="csrf-token"]').attr('content')
+                    },
+                    success: function(result){
+                        console.log(result);
+                    }
+                });
+                Swal.fire(
+                    'Deleted',
+                    'Product deleted successfully',
+                    'success'
+                )
+                products_invoice.ajax.reload();
+            }else if(result.dismiss === Swal.DismissReason.cancel){
+                enable_btn(btn,"<i class='icon-trash2'></i>");
+                Swal.fire(
+                    'Cancelled',
+                    '',
+                    'error'
+                )
+            }
+        })
+
+    })
+
 })

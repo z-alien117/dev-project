@@ -32,6 +32,7 @@ Route::group(['prefix' => 'functions', 'as' => 'functions.'], function(){
     Route::post('invoice_product/{invoice}', [InvoicesController::class, 'store_invoice_product'])->name('store_invoice_product');
     Route::get('invoices/{invoice}', [InvoicesController::class, 'edit'])->name('edit_invoice');
     Route::delete('invoices/{invoice}', [InvoicesController::class, 'destroy'])->name('delete_invoice');
+    Route::delete('invoice_product,{invoice_product}', [InvoicesController::class, 'destroy_invoice_product'])->name('destroy_invoice_product');
 
 
 

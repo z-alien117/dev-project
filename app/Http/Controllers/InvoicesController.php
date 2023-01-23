@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Invoices; 
-use App\Models\InvoiceDetails; 
+use App\Models\Invoices;
+use App\Models\InvoiceDetails;
 use App\Models\Clients;
 use App\Models\Products;
 use Carbon\Carbon;
@@ -55,7 +55,7 @@ class InvoicesController extends Controller
             ->addColumn('Options',function($invoice_details){
                 return
                 "
-                <a href='#' class='remove' title='Remove this item'><i class='icon-trash2'></i>'MY ID IS: ".$invoice_details->id."'</a>
+                <a class='remove btn_remove_product' title='Remove this item' delete_url='".route('functions.destroy_invoice_product',["invoice_product"=>$invoice_details->id])."'><i class='icon-trash2'></i></a>
                 ";
             })
             ->rawColumns(['Options'])
@@ -182,5 +182,16 @@ class InvoicesController extends Controller
     public function destroy(Invoices $invoices)
     {
         //
+    }
+    /**
+     * Remove the product from the invoice details.
+     *
+     * @param  \App\Models\InvoiceDetails  $InvoicesDetails
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy_invoice_product(InvoiceDetails $invoice_product)
+    {
+        $invoice_product->delete();
+        return response()->json(null,204);
     }
 }
