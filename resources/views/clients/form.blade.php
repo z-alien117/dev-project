@@ -16,7 +16,7 @@
                 <div class="row">
                     <div class="col-md-4 form-group">
                         <label for="template-contactform-name">Name <small>*</small></label>
-                        <input type="text" name="name" id="name" value="{{$client->name}}" class="sm-form-control required" />
+                        <input type="text" name="name" id="name" value="{{$client->Name}}" class="sm-form-control required" />
                     </div>
 
                     <div class="w-100"></div>

@@ -60,7 +60,7 @@ class ProductsController extends Controller
             'name'=>$request->name,
             'price'=>$request->price
         ]);
-        
+
         $product->save();
 
         return response()->json($product, 201);
@@ -84,9 +84,13 @@ class ProductsController extends Controller
      * @param  \App\Models\Products  $products
      * @return \Illuminate\Http\Response
      */
-    public function edit(Products $products)
+    public function edit(Products $product)
     {
-        //
+        $view = view('products.form', ['product'=>$product])->render();
+        return response()->json([
+            "status"=>"successful",
+            "view"=>$view
+            ],200);
     }
 
     /**
@@ -96,9 +100,18 @@ class ProductsController extends Controller
      * @param  \App\Models\Products  $products
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Products $products)
+    public function update(Request $request, Products $product_update)
     {
-        //
+        $validatedData = $request->validate([
+            'name'=>'required',
+            'price'=>'required'
+        ]);
+
+        $product_update->name = $request->name;
+        $product_update->price = $request->price;
+        $product_update->save();
+        return response()->json($product_update,200);
+
     }
 
     /**
@@ -107,8 +120,10 @@ class ProductsController extends Controller
      * @param  \App\Models\Products  $products
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Products $products)
+    public function destroy(Products $product)
     {
-        //
+        $product->delete();
+        return response()->json(null,204);
+
     }
 }

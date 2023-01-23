@@ -19,8 +19,9 @@ Route::group(['prefix' => 'functions', 'as' => 'functions.'], function(){
     Route::get('products_data', [ProductsController::class, 'index'])->name('products_data');
     Route::get('products/form', [ProductsController::class, 'create'])->name('products_form');
     Route::post('products', [ProductsController::class, 'store'])->name('store_product');
-    Route::get('products/{product}', [ProductController::class, 'edit'])->name('edit_product');
-    Route::delete('products/{product}', [ProductController::class, 'destroy'])->name('delete_product');
+    Route::get('products/{product}', [ProductsController::class, 'edit'])->name('edit_product');
+    Route::put('products/{product_update}', [ProductsController::class, 'update'])->name('update_product');
+    Route::delete('products/{product}', [ProductsController::class, 'destroy'])->name('delete_product');
 
 
 });
