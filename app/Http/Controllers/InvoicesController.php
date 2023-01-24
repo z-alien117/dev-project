@@ -156,9 +156,13 @@ class InvoicesController extends Controller
      * @param  \App\Models\Invoices  $invoices
      * @return \Illuminate\Http\Response
      */
-    public function edit(Invoices $invoices)
+    public function edit(Invoices $invoice)
     {
-        //
+        $view = view('invoices.form', ['invoice'=>$invoice, 'clients'=>Clients::all(), 'products'=>Products::all()])->render();
+        return response()->json([
+            "status"=>"successful",
+            "view"=>$view
+            ],200);
     }
 
     /**
@@ -170,7 +174,6 @@ class InvoicesController extends Controller
      */
     public function update(Request $request, Invoices $invoices)
     {
-        //
     }
 
     /**

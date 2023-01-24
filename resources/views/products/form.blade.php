@@ -37,8 +37,7 @@
             <button class="button button-3d button-rounded button-red"  data-bs-dismiss="modal"><i class="icon-thumbs-down21"></i> Cancel</button>
         @endslot
     </x-modal>
-@endisset
-
+@else
 <x-modal>
     @slot('title')
         Add Product
@@ -81,3 +80,4 @@
     </div>
     @endslot
 </x-modal>
+@endisset

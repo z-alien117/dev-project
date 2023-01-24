@@ -34,7 +34,16 @@ async function openModal(url, btn, text){
     $('.datetimepicker').datetimepicker({
         showClose: true
     });
+}
 
+async function openModalEdit(url, btn, text){
+    await openModalAsync(url, btn, text);
+    // $('#product_invoice_table').hide();
+    $('.selectpicker').selectpicker();
+    $('.datetimepicker').datetimepicker({
+        showClose: true
+    });
+    products_invoice = tableInvoiceProducts();
 }
 
 $(function(){
@@ -49,6 +58,8 @@ $(function(){
         openModal(url,btn,text);
         
     });
+
+    // Invoices functions
 
     $(document).on('click','.btn_save',function(){
         var btn = $(this);
@@ -98,8 +109,7 @@ $(function(){
         })
     });
 
-    $(document).on('click','.btn_delete',function(event){
-        event.preventDefault();
+    $(document).on('click','.btn_delete',function(){
         var btn = $(this);
         disable_btn(btn);
         Swal.fire({
@@ -141,6 +151,21 @@ $(function(){
 
     })
 
+    $(document).on('click','.btn_edit', function(){
+        var btn = $(this);
+        var text = "<i class='icon-line-edit-2'></i> Edit";
+        var url = $(this).attr('get_url');
+        openModalEdit(url,btn,text);
+
+
+    })
+
+
+
+
+
+    // Invoice details functions
+
     $(document).on('change','#product_select', function(){
         var price = $('#product_select option:selected').attr('data-subtext');
         $('#price').val(price);
@@ -170,18 +195,13 @@ $(function(){
                 $('#product_select').selectpicker('refresh');
                 $('#price').val('');
                 $('#quantity').val('');
-                products_invoice.ajax.reload();
+                $('#product_invoice_table').DataTable().ajax.reload();
+                // products_invoice.ajax.reload();
 
                 enable_btn(btn, '<i class="icon-save2"></i>Add');
             },
             error: function(result,status,xhr){
                 console.log(result);
-                $errors = result['responseJSON']['errors'];
-                Object.entries($errors).forEach(entry => {
-                    const [key,value]=entry;
-                    console.log(key);
-                    document.getElementById(key).classList.add("error");
-                });
                 Swal.fire(
                     'Error',
                     'Please verify the required data',
@@ -223,7 +243,7 @@ $(function(){
                     'Product deleted successfully',
                     'success'
                 )
-                products_invoice.ajax.reload();
+            $('#product_invoice_table').DataTable().ajax.reload();
             }else if(result.dismiss === Swal.DismissReason.cancel){
                 enable_btn(btn,"<i class='icon-trash2'></i>");
                 Swal.fire(
