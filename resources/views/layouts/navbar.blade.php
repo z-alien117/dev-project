@@ -6,8 +6,8 @@
                 <!-- Logo
                 ============================================= -->
                 <div id="logo">
-                    <a href="index.html" class="standard-logo" data-dark-logo="{{asset('images/logo-side-dark.png')}}" data-mobile-logo="{{asset('images/logo.png')}}"><img src="{{asset('images/logo-side.png')}}" alt="Canvas Logo"></a>
-                    <a href="index.html" class="retina-logo" data-dark-logo="{{asset('images/logo-side-dark@2x.png')}}" data-mobile-logo="{{asset('images/logo@2x.png')}}"><img src="{{asset('images/logo-side@2x.png')}}" alt="Canvas Logo"></a>
+                    <a href="#" class="standard-logo" data-dark-logo="{{asset('images/logo-side-dark.png')}}" data-mobile-logo="{{asset('images/logo.png')}}"><img src="{{asset('images/logo-side.png')}}" alt="Canvas Logo"></a>
+                    <a href="#" class="retina-logo" data-dark-logo="{{asset('images/logo-side-dark@2x.png')}}" data-mobile-logo="{{asset('images/logo@2x.png')}}"><img src="{{asset('images/logo-side@2x.png')}}" alt="Canvas Logo"></a>
                 </div><!-- #logo end -->
 
                 <div id="primary-menu-trigger"><i class="icon-reorder"></i></div>
