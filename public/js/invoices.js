@@ -160,6 +160,48 @@ $(function(){
 
     })
 
+    $(document).on('click','.btn_update',function(){
+        var btn = $(this);
+        disable_btn(btn);
+        var formData = new FormData(document.getElementById('DynamicForm'));
+        console.log(formData)
+        $.ajax({
+            url: $('#DynamicForm').attr('action'),
+            type: 'POST',
+            data: formData,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function(result, status, xhr){
+                console.log(result);
+
+                Swal.fire(
+                    'Correct',
+                    'Invoice added',
+                    'success'
+                );
+                enable_btn(btn, '<i class="icon-save2"></i> Update');
+                table.ajax.reload();
+
+            },
+            error: function(result,status,xhr){
+                console.log(result);
+                $errors = result['responseJSON']['errors'];
+                Object.entries($errors).forEach(entry => {
+                    const [key,value]=entry;
+                    console.log(key);
+                    document.getElementById(key).classList.add("error");
+                });
+                Swal.fire(
+                    'Error',
+                    'Please verify the required data',
+                    'error'
+                )
+            enable_btn(btn, '<i class="icon-save2"></i>Save');
+            }
+        })
+    });
+
 
 
 

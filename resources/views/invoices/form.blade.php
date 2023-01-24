@@ -5,7 +5,7 @@
         @endslot
         @slot('content')
         <div id="basic">
-            <form class="mb-0" id="DynamicForm" name="template-contactform" action="{{route('functions.update_invoice', ['invoice_update'=>$invoice->id])}}" method="POST">
+            <form class="mb-0" id="DynamicForm" name="template-contactform" action="{{route('functions.update_invoice', ['invoice'=>$invoice->id])}}" method="POST">
                 @method('PUT')
                 @csrf
 
@@ -43,6 +43,9 @@
                     </div>
                 </div>
                 <input type="hidden" name="prefix" value="template-contactform-">
+                <div class="col-12 form-group">
+                    <button class="btn_update button button-3d button-rounded button-green"><i class="icon-save2"></i> Update</button>
+                </div>
             </form>
         </div>
         <div id="product_data">
@@ -107,6 +110,7 @@
             </table>
         </div>
         @endslot
+
     </x-modal>
 
 @else

@@ -172,8 +172,20 @@ class InvoicesController extends Controller
      * @param  \App\Models\Invoices  $invoices
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Invoices $invoices)
+    public function update(Request $request, Invoices $invoice)
     {
+        $validatedData = $request->validate([
+            'client'=>'required',
+            'date'=>'required'
+        ]);
+
+        $date = Carbon::createFromFormat('m/d/Y G:i A', $request->date)->toDateTimeString();
+        $invoice->clientid=$request->client;
+        $invoice->date=$date;
+        $invoice->save();
+        return response()->json($invoice,200);
+
+
     }
 
     /**
